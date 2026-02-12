@@ -3,136 +3,194 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandy 💖</title>
+<title>Para Sandy 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-    margin:0;
-    text-align:center;
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    font-family:'Poppins',sans-serif;
+    height:100vh;
     overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
     color:white;
+    background: linear-gradient(-45deg,#ff9ecf,#ff6fa5,#c77dff,#9d4edd);
+    background-size:400% 400%;
+    animation: gradient 12s ease infinite;
+}
+
+@keyframes gradient{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.card{
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.15);
+    border-radius:30px;
+    padding:40px;
+    width:90%;
+    max-width:450px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
 }
 
 h1{
-    margin-top:60px;
-    font-size:38px;
-    text-shadow:2px 2px 8px #ff4d6d;
+    font-weight:600;
+    margin-bottom:15px;
+    font-size:26px;
 }
 
 #contador{
-    font-size:20px;
-    margin-top:10px;
+    font-size:14px;
+    opacity:0.9;
+    margin-bottom:25px;
 }
 
 button{
-    font-size:22px;
-    padding:12px 25px;
-    margin:20px;
+    padding:12px 30px;
+    font-size:18px;
     border:none;
-    border-radius:15px;
+    border-radius:50px;
+    margin:10px;
     cursor:pointer;
     transition:0.3s;
-    position:relative;
+    font-weight:500;
 }
 
-#si{ background:#ff4d6d; color:white; }
-#no{ background:#333; color:white; position:absolute; }
+#si{
+    background:white;
+    color:#d63384;
+    box-shadow:0 5px 20px rgba(255,255,255,0.4);
+}
+
+#si:hover{
+    transform:scale(1.1);
+}
+
+#no{
+    background:rgba(0,0,0,0.4);
+    color:white;
+    position:absolute;
+}
 
 #mensajeFinal{
-    font-size:28px;
-    margin-top:20px;
     display:none;
-    animation:aparecer 1s ease-in-out;
+    margin-top:20px;
+    font-size:18px;
+    animation:fadeIn 1.5s ease forwards;
 }
 
-@keyframes aparecer{
-    from{opacity:0;transform:scale(0.5);}
-    to{opacity:1;transform:scale(1);}
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
-/* Nombre gigante animado */
 #nombreGigante{
     position:fixed;
-    top:40%;
+    top:45%;
     left:50%;
     transform:translate(-50%,-50%) scale(0);
-    font-size:80px;
-    font-weight:bold;
-    color:white;
-    text-shadow:0 0 20px #fff,0 0 40px #ff4d6d,0 0 60px #ff1a75;
+    font-size:60px;
+    font-weight:700;
     opacity:0;
-    transition:all 1.5s ease-in-out;
+    text-shadow:0 0 30px white;
+    transition:1.5s ease;
 }
 
 .corazon{
     position:absolute;
-    font-size:20px;
-    pointer-events:none;
+    font-size:18px;
     animation:flotar 6s linear infinite;
+    opacity:0.8;
 }
 
 @keyframes flotar{
-    from{transform:translateY(100vh);opacity:1;}
-    to{transform:translateY(-10vh);opacity:0;}
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
 }
 
-canvas{
+#inicio{
     position:fixed;
-    top:0;
-    left:0;
-    pointer-events:none;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#ff6fa5,#9d4edd);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:10;
+    cursor:pointer;
+}
+
+#inicio h2{
+    font-size:24px;
+    animation:latido 1.5s infinite;
+}
+
+@keyframes latido{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
 }
 </style>
 </head>
 
 <body>
 
-<h1>Sandy, ¿quieres ser mi San Valentín? 💘</h1>
-<div id="contador"></div>
+<div id="inicio">
+    <h2>💖 Toca la pantalla Sandy 💖</h2>
+</div>
 
-<button id="si">Sí 💖</button>
-<button id="no">No 😢</button>
+<div class="card" id="contenido" style="display:none;">
+    <h1>Sandy, ¿quieres ser mi San Valentín? 💕</h1>
+    <div id="contador"></div>
 
-<div id="mensajeFinal">
-💌 Sandy, sabía que dirías que sí 💌 <br><br>
-Te invito este 14 de febrero a las 20:00 horas ❤️✨
+    <button id="si">Sí 💖</button>
+    <button id="no">No 😅</button>
+
+    <div id="mensajeFinal">
+        💌 Sabía que dirías que sí 💌 <br><br>
+        14 de febrero — 20:00 horas ✨💕
+    </div>
 </div>
 
 <div id="nombreGigante">SANDY 💖</div>
 
 <audio id="musica" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/download/audio/2021/09/20/audio_884fe92c9e.mp3?filename=romantic-piano-11706.mp3" type="audio/mpeg">
 </audio>
 
-<canvas id="confetti"></canvas>
-
 <script>
-let botonSi=document.getElementById("si");
-let botonNo=document.getElementById("no");
-let mensaje=document.getElementById("mensajeFinal");
-let musica=document.getElementById("musica");
-let nombreGigante=document.getElementById("nombreGigante");
+const inicio=document.getElementById("inicio");
+const contenido=document.getElementById("contenido");
+const musica=document.getElementById("musica");
+const botonSi=document.getElementById("si");
+const botonNo=document.getElementById("no");
+const mensaje=document.getElementById("mensajeFinal");
+const nombreGigante=document.getElementById("nombreGigante");
 
-let tamaño=22;
+let tamaño=18;
 
-/* Música */
-document.body.addEventListener("click",()=>{
+inicio.addEventListener("click",()=>{
+    inicio.style.display="none";
+    contenido.style.display="block";
     musica.play();
-},{once:true});
+});
 
-/* Botón No escapa */
 botonNo.addEventListener("mouseover",()=>{
-    let x=Math.random()*(window.innerWidth-100);
-    let y=Math.random()*(window.innerHeight-100);
+    let x=Math.random()*(window.innerWidth-120);
+    let y=Math.random()*(window.innerHeight-120);
     botonNo.style.left=x+"px";
     botonNo.style.top=y+"px";
-    tamaño+=5;
+    tamaño+=3;
     botonSi.style.fontSize=tamaño+"px";
 });
 
-/* Cuando dice Sí */
 botonSi.addEventListener("click",()=>{
     mensaje.style.display="block";
     botonSi.style.display="none";
@@ -140,108 +198,33 @@ botonSi.addEventListener("click",()=>{
 
     nombreGigante.style.opacity="1";
     nombreGigante.style.transform="translate(-50%,-50%) scale(1)";
-
-    lanzarConfetti();
-    explosionCorazones();
 });
 
-/* Corazones flotando */
-function crearCorazon(){
-    const c=document.createElement("div");
-    c.classList.add("corazon");
-    c.innerHTML="💖";
-    c.style.left=Math.random()*100+"vw";
-    c.style.fontSize=(Math.random()*20+10)+"px";
-    c.style.animationDuration=(Math.random()*3+3)+"s";
-    document.body.appendChild(c);
-    setTimeout(()=>{c.remove();},6000);
-}
-setInterval(crearCorazon,300);
-
-/* Contador */
 function actualizarContador(){
     let ahora=new Date();
     let año=ahora.getFullYear();
     let fecha=new Date(año,1,14,20,0,0);
-    if(ahora>fecha){ fecha=new Date(año+1,1,14,20,0,0); }
-
+    if(ahora>fecha){fecha=new Date(año+1,1,14,20,0,0);}
     let diff=fecha-ahora;
+
     let d=Math.floor(diff/(1000*60*60*24));
     let h=Math.floor((diff/(1000*60*60))%24);
     let m=Math.floor((diff/1000/60)%60);
     let s=Math.floor((diff/1000)%60);
 
     document.getElementById("contador").innerHTML=
-    "⏳ Faltan "+d+" días "+h+"h "+m+"m "+s+"s para nuestra cita 💕";
+    `⏳ Faltan ${d}d ${h}h ${m}m ${s}s 💖`;
 }
 setInterval(actualizarContador,1000);
 
-/* Confetti */
-function lanzarConfetti(){
-    const canvas=document.getElementById("confetti");
-    const ctx=canvas.getContext("2d");
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
-
-    let piezas=[];
-    for(let i=0;i<150;i++){
-        piezas.push({
-            x:Math.random()*canvas.width,
-            y:Math.random()*canvas.height,
-            r:Math.random()*6+4,
-            d:Math.random()*canvas.height
-        });
-    }
-
-    function dibujar(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle="white";
-        ctx.beginPath();
-        for(let p of piezas){
-            ctx.moveTo(p.x,p.y);
-            ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
-        }
-        ctx.fill();
-        for(let p of piezas){
-            p.y+=2;
-            if(p.y>canvas.height){
-                p.y=0;
-                p.x=Math.random()*canvas.width;
-            }
-        }
-    }
-    setInterval(dibujar,20);
-}
-
-/* Explosión de corazones */
-function explosionCorazones(){
-    for(let i=0;i<60;i++){
-        const heart=document.createElement("div");
-        heart.innerHTML="💖";
-        heart.style.position="fixed";
-        heart.style.left="50%";
-        heart.style.top="50%";
-        heart.style.fontSize="30px";
-        heart.style.pointerEvents="none";
-        document.body.appendChild(heart);
-
-        let angle=Math.random()*2*Math.PI;
-        let distance=Math.random()*300;
-
-        let x=Math.cos(angle)*distance;
-        let y=Math.sin(angle)*distance;
-
-        heart.animate([
-            {transform:"translate(-50%,-50%) scale(1)",opacity:1},
-            {transform:`translate(${x}px,${y}px) scale(0.5)`,opacity:0}
-        ],{
-            duration:1500,
-            easing:"ease-out"
-        });
-
-        setTimeout(()=>heart.remove(),1500);
-    }
-}
+setInterval(()=>{
+    const c=document.createElement("div");
+    c.className="corazon";
+    c.innerHTML="💗";
+    c.style.left=Math.random()*100+"vw";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),6000);
+},500);
 </script>
 
 </body>
